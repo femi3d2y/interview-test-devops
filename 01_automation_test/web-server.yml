@@ -1,0 +1,18 @@
+- hosts: localhost
+  become: true
+  tasks: 
+  - name: coach user
+    user:
+      name: coach
+      shell: /bin/bash
+  - name: docker service
+    service:
+      name: docker
+      state: started
+  - name: create nginx container
+    docker_container:
+      name: webserver
+      image: nginx
+      published_ports:
+        - 8080:80
+
